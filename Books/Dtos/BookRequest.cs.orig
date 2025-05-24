@@ -1,0 +1,29 @@
+﻿using online_school_api.Students.Model;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace online_school_api.Books.Dtos
+{
+    public class BookRequest
+    {
+
+        public string Name { get; set; }
+
+
+        public int StudentId { get; set; }
+
+<<<<<<< HEAD
+     
+
+=======
+       
+>>>>>>> 3f9323812e00cf2d4be7c5eab33c8bd48fbbe4ad
+        
+
+
+
+
+
+
+    }
+}
