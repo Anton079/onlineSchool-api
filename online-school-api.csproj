@@ -26,6 +26,10 @@
 	<ItemGroup>
 	  <None Include="Data\AppDbContext.cs" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Courses\Dto\" />
+	</ItemGroup>
 	  
 	  
 	  

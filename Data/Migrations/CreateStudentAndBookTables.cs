@@ -2,7 +2,7 @@
 
 namespace online_school_api.Migrations
 {
-    [Migration(03042025)] 
+    [Migration(26052025)] 
     public class CreateStudentAndBookTables : Migration
     {
         public override void Up()
@@ -19,12 +19,26 @@ namespace online_school_api.Migrations
                 .WithColumn("name").AsString().NotNullable()
                 .WithColumn("created").AsDateTime().NotNullable()
                 .WithColumn("StudentId").AsInt32().ForeignKey("students", "id").OnDelete(System.Data.Rule.Cascade);
+
+            Create.Table("courses")
+                .WithColumn("id").AsInt32().PrimaryKey().Identity()
+                .WithColumn("name").AsString().NotNullable()
+                .WithColumn("department").AsString().NotNullable();
+
+            Create.Table("entrolments")
+                .WithColumn("id").AsInt32().PrimaryKey().Identity()
+                .WithColumn("studentId").AsInt32().ForeignKey("students", "id").OnDelete(System.Data.Rule.Cascade)
+                .WithColumn("coruseId").AsInt32().ForeignKey("courses", "id").OnDelete(System.Data.Rule.Cascade)
+                .WithColumn("createdAt").AsDate().NotNullable();
+
         }
 
         public override void Down()
         {
             Delete.Table("books");
             Delete.Table("students");
+            Delete.Table("enrolemts");
+            Delete.Table("courses");
         }
     }
 }

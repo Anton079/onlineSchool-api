@@ -40,12 +40,8 @@ public class Program
         builder.Services.AddScoped<IStudentRepo, StudentRepo>();
         builder.Services.AddScoped<ICommandServiceStudent, CommandServiceStudent>();
 
-
         builder.Services.AddScoped<IBookRepo, BookRepo>();
         builder.Services.AddScoped<IQueryServiceBook,QueryServiceBook>();
-
-
-
 
 
         builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
