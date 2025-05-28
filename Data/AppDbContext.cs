@@ -22,6 +22,7 @@ namespace online_school_api.Data
 
         public virtual DbSet<Course> Courses { get; set; }
 
+      
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,28 +30,26 @@ namespace online_school_api.Data
 
 
             modelBuilder.Entity<Student>()
-                .HasMany(s => s.Books)
-                .WithOne(b => b.Student)
+                .HasMany(s => s.Books)             
+                .WithOne(b => b.Student)           
                 .HasForeignKey(b => b.StudentId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Course>()
                      .HasMany(c => c.Enrolments)
-                     .WithOne(e => e.Courses)
+                     .WithOne(e => e.Course)
                      .HasForeignKey(e => e.CourseId)
                      .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Enrolment>()
-                    .HasOne(e => e.Students)
-                    .WithMany(s => s.Enrolments)
-                    .HasForeignKey(e => e.CourseId)
-                    .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Student>()
+              .HasMany(s => s.Enrolments)
+              .WithOne(e => e.Student)
+              .HasForeignKey(e => e.StudentId)
+              .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Enrolment>()
-                    .HasOne(e => e.Courses)
-                    .WithMany(c => c.Enrolments)
-                    .HasForeignKey(e => e.CourseId)
-                    .OnDelete(DeleteBehavior.Cascade);
+
+
+
 
         }
 

@@ -25,10 +25,10 @@ namespace online_school_api.Enrolments.Models
 
         [Required]
         [Column("createdAt")]
-        public int CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; }
 
-        public virtual Student Students { get; set; }
+        public virtual Student Student { get; set; }
 
-        public virtual Course Courses { get; set; }
+        public virtual Course Course { get; set; }
     }
 }

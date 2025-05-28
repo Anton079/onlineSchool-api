@@ -3,6 +3,8 @@ using online_school_api.Students.Repository;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using online_school_api.Books.Dtos;
+using online_school_api.Enrolments.Dtos;
+using online_school_api.Courses.Dtos;
 
 namespace online_school_api.Students.Dtos
 {
@@ -12,8 +14,6 @@ namespace online_school_api.Students.Dtos
 
         public string Email { get; set; }
 
-
-
         public string Name { get; set; }
 
         public int Age { get; set; }
@@ -21,7 +21,9 @@ namespace online_school_api.Students.Dtos
         public string University { get; set; }
 
 
-        public  List<BookResponse> Books { get; set; } = new();
+        public List<BookResponse> Books { get; set; } = new();
+
+        public List<CourseResponse> Courses { get; set; } = new();
 
 
 

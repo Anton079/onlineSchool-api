@@ -25,10 +25,10 @@ namespace online_school_api.Migrations
                 .WithColumn("name").AsString().NotNullable()
                 .WithColumn("department").AsString().NotNullable();
 
-            Create.Table("entrolments")
+            Create.Table("enrolments")
                 .WithColumn("id").AsInt32().PrimaryKey().Identity()
                 .WithColumn("studentId").AsInt32().ForeignKey("students", "id").OnDelete(System.Data.Rule.Cascade)
-                .WithColumn("coruseId").AsInt32().ForeignKey("courses", "id").OnDelete(System.Data.Rule.Cascade)
+                .WithColumn("courseId").AsInt32().ForeignKey("courses", "id").OnDelete(System.Data.Rule.Cascade)
                 .WithColumn("createdAt").AsDate().NotNullable();
 
         }

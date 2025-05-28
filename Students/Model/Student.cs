@@ -5,6 +5,7 @@ using online_school_api.Books.Model;
 using online_school_api.Enrolments.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace online_school_api.Students.Model
 {
@@ -36,8 +37,9 @@ namespace online_school_api.Students.Model
 
 
         public virtual List<Book> Books { get; set; } = new();
-
-        public virtual List<Enrolment> Enrolments { get; set; } = new();
+        [JsonIgnore]
+        public virtual ICollection<Enrolment> Enrolments { get; set; } = new List<Enrolment>();
+  
 
 
 

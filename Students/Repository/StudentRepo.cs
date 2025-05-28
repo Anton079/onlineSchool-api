@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using online_school_api.Books.Dtos;
 using online_school_api.Books.Model;
 using online_school_api.Data;
+using online_school_api.Enrolments.Dtos;
 using online_school_api.Students.Dtos;
 using online_school_api.Students.Mappers;
 using online_school_api.Students.Model;
@@ -24,16 +25,20 @@ namespace online_school_api.Students.Repository
 
         public async Task<GetAllStudentsDto> GetAllAsync()
         {
-            var students = await _context.Students
-                .Include(s => s.Books)
-                .ToListAsync();
+             var students = await _context.Students
+                                  .Include(s => s.Books)
+                                  .Include(s => s.Enrolments)
+                                      .ThenInclude(e => e.Course)
+                                  .AsNoTracking()
+                                  .ToListAsync();
 
             var mapped = _mapper.Map<List<StudentResponse>>(students);
 
             return new GetAllStudentsDto
             {
                 ListStudent = mapped
-            };
+            };
+
         }
 
         public async Task<StudentResponse> FindByNameStudentAsync(string name)

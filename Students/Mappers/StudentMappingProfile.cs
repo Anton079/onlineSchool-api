@@ -16,8 +16,10 @@ namespace online_school_api.Students.Mappers
 
             CreateMap<Student, StudentResponse>()
 
-              .ForMember(dest => dest.Books, opt => opt.MapFrom(src => src.Books));
-
+              .ForMember(dest => dest.Books, opt => opt.MapFrom(src => src.Books))
+               .ForMember(dst => dst.Courses,
+                       cfg => cfg.MapFrom(src =>
+                           src.Enrolments.Select(e => e.Course)));
 
 
 
