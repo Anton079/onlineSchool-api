@@ -11,7 +11,7 @@ namespace online_school_api.Enrolments.Dtos
 
         public int CourseId { get; set; }
 
-        public DateTime Created { get; set; }
+        public DateTime CreatedAt { get; set; }
 
 
 

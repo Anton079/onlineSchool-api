@@ -2,7 +2,10 @@ using FluentMigrator.Runner;
 using Microsoft.EntityFrameworkCore;
 using online_school_api.Books.Repository;
 using online_school_api.Books.Service;
+using online_school_api.Courses.Repository;
 using online_school_api.Data;
+using online_school_api.Enrolments.Repository;
+using online_school_api.Enrolments.Service;
 using online_school_api.Students.Repository;
 using online_school_api.Students.Service;
 using System.Windows.Input;
@@ -43,6 +46,10 @@ public class Program
         builder.Services.AddScoped<IBookRepo, BookRepo>();
         builder.Services.AddScoped<IQueryServiceBook,QueryServiceBook>();
 
+        builder.Services.AddScoped<ICourseRepo, CourseRepo>();
+
+        builder.Services.AddScoped<IEnrolmentRepo, EnrolmentRepo>();
+        builder.Services.AddScoped<ICommandServiceEnrolment, CommandServiceEnrolment>();
 
         builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
