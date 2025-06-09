@@ -5,6 +5,7 @@ using online_school_api.Students.Service;
 using System.Security.AccessControl;
 using online_school_api.Books.Dtos;
 using online_school_api.Books.Exceptions;
+using online_school_api.Enrolments.Dtos;
 
 namespace online_school_api.Students
 {
@@ -40,6 +41,8 @@ namespace online_school_api.Students
         }
 
 
+        //CREATE
+
         [HttpPost("create")]
         public async Task<ActionResult<StudentResponse>> CreateAsync([FromBody]StudentRequest studentRequest)
         {
@@ -69,6 +72,22 @@ namespace online_school_api.Students
             }
         }
 
+        [HttpPost("addEnrolment")]
+        public async Task<ActionResult<EnrolmentResponse>> AddEnrolmentAsync([FromBody] EnrolmentStudentRequest request)
+        {
+            try
+            {
+                var response = await _command.CreateEnrolmentAsync(request);
+                return Created("", response);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        //UPDATE
 
         [HttpPut("updateStudent/{id}")]
         public async Task<ActionResult<StudentResponse>> UpdateStudentAsync([FromRoute] int id, [FromBody]StudentUpdateRequest update)
@@ -109,6 +128,21 @@ namespace online_school_api.Students
             }
         }
 
+
+        [HttpPut("updateEnrolment/{idEnrolment}")]
+        public async Task<ActionResult<EnrolmentResponse>> UpdateEnrolment([FromRoute]int idEnrolment, [FromBody]EnrolmentStudentRequest enrolStudentRequest)
+        {
+            try
+            {
+                EnrolmentResponse resp = await _command.UpdateEnrolmentAsync(idEnrolment, enrolStudentRequest);
+                return Accepted(resp);
+            }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        //DELETE
 
         [HttpDelete("DeleteStudent/{id}")]
         public async Task<ActionResult<StudentResponse>> DeleteStudentAsync([FromRoute]int id)

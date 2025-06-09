@@ -23,7 +23,7 @@ namespace online_school_api.Students.Dtos
 
         public List<BookResponse> Books { get; set; } = new();
 
-        public List<CourseResponse> Courses { get; set; } = new();
+        public List<CourseStudentsResponse> Courses { get; set; } = new();
 
 
 

@@ -16,12 +16,12 @@ namespace online_school_api.Courses.Controller
         }
 
         [HttpPost("add")]
-        public async Task<ActionResult<CourseResponse>> AddCourse([FromBody] CourseRequest request)
+        public async Task<ActionResult<CourseStudentsResponse>> AddCourse([FromBody] CourseRequest request)
         {
             try
             {
                 var added = await _repo.AddCourse(request);
-                return Created("", added);
+                return Ok(added);
             }catch(Exception ex)
             {
                 return NotFound(ex.Message);
@@ -29,7 +29,7 @@ namespace online_school_api.Courses.Controller
         }
 
         [HttpDelete("delete/{id}")]
-        public async Task<ActionResult<CourseResponse>> DeleteCourse(int id)
+        public async Task<ActionResult<CourseStudentsResponse>> DeleteCourse(int id)
         {
             try
             {

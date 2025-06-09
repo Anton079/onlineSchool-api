@@ -2,7 +2,7 @@
 
 namespace online_school_api.Courses.Dtos
 {
-    public class CourseResponse
+    public class CourseStudentsResponse
     {
         public int Id { get; set; }
 
@@ -10,6 +10,6 @@ namespace online_school_api.Courses.Dtos
 
         public string Departament {  get; set; }
 
-        public List<Enrolment> Enrolments { get; set; } = new();
+     
     }
 }

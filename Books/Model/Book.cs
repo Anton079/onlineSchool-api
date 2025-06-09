@@ -3,6 +3,7 @@ using online_school_api.Students.Model;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Permissions;
+using System.Text.Json.Serialization;
 
 namespace online_school_api.Books.Model
 {
@@ -23,6 +24,7 @@ namespace online_school_api.Books.Model
         [Column("created")]
          public DateTime Created { get; set; }
 
+        [JsonIgnore]
         public virtual Student Student { get; set; }
 
         public int StudentId { get; set; }

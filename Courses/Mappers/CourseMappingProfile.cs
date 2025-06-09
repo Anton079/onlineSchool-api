@@ -9,7 +9,7 @@ namespace online_school_api.Courses.Mappers
         public CourseMappingProfile()
         {
             CreateMap<CourseRequest, Course>();
-            CreateMap<Course, CourseResponse>();
+            CreateMap<Course, CourseStudentsResponse>();
 
         }
     }

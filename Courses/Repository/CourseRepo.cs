@@ -17,21 +17,21 @@ namespace online_school_api.Courses.Repository
             _mapper = mapper;
         }
 
-        public async Task<CourseResponse> AddCourse(CourseRequest request)
+        public async Task<CourseStudentsResponse> AddCourse(CourseRequest request)
         {
             var course = _mapper.Map<Course>(request);
 
             await _dbContext.Courses.AddAsync(course);
             await _dbContext.SaveChangesAsync();
 
-            var response = _mapper.Map<CourseResponse>(course);
+            var response = _mapper.Map<CourseStudentsResponse>(course);
             return response;
         }
 
-        public async Task<CourseResponse> DeleteCourse(int id)
+        public async Task<CourseStudentsResponse> DeleteCourse(int id)
         {
             Course course = await _dbContext.Courses.FindAsync(id);
-            CourseResponse resp = _mapper.Map<CourseResponse>(course);
+            CourseStudentsResponse resp = _mapper.Map<CourseStudentsResponse>(course);
 
             _dbContext.Remove(course);
             await _dbContext.SaveChangesAsync();

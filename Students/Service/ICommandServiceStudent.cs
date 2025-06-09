@@ -1,4 +1,5 @@
 ﻿using online_school_api.Books.Dtos;
+using online_school_api.Enrolments.Dtos;
 using online_school_api.Students.Dtos;
 using online_school_api.Students.Model;
 
@@ -22,12 +23,14 @@ namespace online_school_api.Students.Service
         Task<BookResponse> UpdateBookAsync(int idstudent, int idbook, BookUpdateRequest updatebook);
 
 
+        //Enrolments
 
 
+        Task<EnrolmentResponse> CreateEnrolmentAsync(EnrolmentStudentRequest request);
 
+        Task<EnrolmentResponse> UpdateEnrolmentAsync(int id, EnrolmentStudentRequest update);
 
-
-
+        Task<EnrolmentResponse> DeleteEnrolmentAsync(int id);
 
     }
 }

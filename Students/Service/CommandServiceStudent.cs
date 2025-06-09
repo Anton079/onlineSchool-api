@@ -8,6 +8,8 @@ using online_school_api.Students.Model;
 using Microsoft.AspNetCore.Server.IIS.Core;
 using online_school_api.Books.Exceptions;
 using System.CodeDom;
+using online_school_api.Enrolments.Dtos;
+using online_school_api.Enrolments.Exceptions;
 
 namespace online_school_api.Students.Service
 {
@@ -25,7 +27,7 @@ namespace online_school_api.Students.Service
 
 
         //User
-        public async  Task<StudentResponse> CreateAsync(StudentRequest student)
+        public async Task<StudentResponse> CreateAsync(StudentRequest student)
         {
             StudentResponse verif = await this._repo.FindByNameStudentAsync(student.Name);
 
@@ -45,17 +47,14 @@ namespace online_school_api.Students.Service
             StudentResponse verf = await this._repo.FindByIdAsync(id);
             if(verf != null)
             {
-                if(verf is StudentRequest)
-                {
-                    verf.Name = update.Name ?? verf.Name;
-                    verf.Email = update.Email ?? verf.Email;
-                    verf.Age = update.Age ?? verf.Age;
-                    verf.University = update.University ??verf.University;
+                verf.Name = update.Name ?? verf.Name;
+                verf.Email = update.Email ?? verf.Email;
+                verf.Age = update.Age ?? verf.Age;
+                verf.University = update.University ?? verf.University;
 
-                    StudentResponse response = await this._repo.UpdateStudent(id, update);
+                StudentResponse response = await this._repo.UpdateStudent(id, update);
 
-                    return response;
-                }
+                return response;
             }
             throw new StudentNotFoundException();
         }
@@ -100,19 +99,16 @@ namespace online_school_api.Students.Service
 
             if (book != null)
             {
-                if (book is BookRequest)
-                {
-                    book.Name = updatebook.Name ?? book.Name;
+                book.Name = updatebook.Name ?? book.Name;
 
-                    BookResponse response = await _repo.UpdateBookAsync(idstudent, idbook, updatebook);
-                    return response;
-                }
+                BookResponse response = await _repo.UpdateBookAsync(idstudent, idbook, updatebook);
+                return response;
 
             }
             throw new BookNotFoundException();
         }
 
-        public async  Task<BookResponse> DeleteBookAsync(int idstudent,int idBook)
+        public async Task<BookResponse> DeleteBookAsync(int idstudent,int idBook)
         {
             Student student = await _repo.GetEntityByIdAsync(idstudent);
             Book book = student.Books.FirstOrDefault(s => s.Id == idBook);
@@ -130,8 +126,46 @@ namespace online_school_api.Students.Service
             throw new StudentNotFoundException();
         }
 
+        //Enrolment
+
+        public async Task<EnrolmentResponse> CreateEnrolmentAsync(EnrolmentStudentRequest request)
+        {
+            EnrolmentResponse verif = await this._repo.AreCourseIdAndStudentIdASync(request.StudentId, request.CourseId);
+
+            if (verif == null)
+            {
+                EnrolmentResponse response = await _repo.CreateAsync(request);
+
+                return response;
+            }
+
+            throw new EnrolmentAlreadyExistsException();
+        }
+
+        public async Task<EnrolmentResponse> UpdateEnrolmentAsync(int id, EnrolmentStudentRequest updateReq)
+        {
+            var existing = await _repo.FindByIdEnrolmentAsync(id);
+
+            if (existing == null)
+                throw new EnrolmentNotFoundException();
+
+            var updated = await _repo.UpdateEnrolmentAsync(id, updateReq);
+
+            return updated;
+        }
 
 
+        public async Task<EnrolmentResponse> DeleteEnrolmentAsync(int id)
+        {
+            var existing = await _repo.FindByIdAsync(id);
+            if (existing != null)
+            {
+                var deleted = await _repo.DeleteEnrolment(id);
+                return _mapper.Map<EnrolmentResponse>(deleted);
+            }
+
+            throw new EnrolmentNotFoundException();
+        }
 
     }
 }

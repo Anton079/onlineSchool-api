@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Configuration;
+using System.Text;
 
 namespace online_school_api.system
 {
@@ -19,10 +20,8 @@ namespace online_school_api.system
 
         public const string EnrolmentNotFoundException = "Enrolment nu a fost gasit";
 
-
-
-
-
+        //Course 
+        public const string CourseNotFoundException = "Course nu a fost gasit!";
 
     }
 }

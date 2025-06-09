@@ -37,6 +37,7 @@ namespace online_school_api.Students.Model
 
 
         public virtual List<Book> Books { get; set; } = new();
+
         [JsonIgnore]
         public virtual ICollection<Enrolment> Enrolments { get; set; } = new List<Enrolment>();
   

@@ -4,8 +4,8 @@ namespace online_school_api.Courses.Repository
 {
     public interface ICourseRepo
     {
-        Task<CourseResponse> AddCourse(CourseRequest request);
+        Task<CourseStudentsResponse> AddCourse(CourseRequest request);
 
-        Task<CourseResponse> DeleteCourse(int id);
+        Task<CourseStudentsResponse> DeleteCourse(int id);
     }
 }
