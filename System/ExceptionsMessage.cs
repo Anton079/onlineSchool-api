@@ -23,5 +23,8 @@ namespace online_school_api.system
         //Course 
         public const string CourseNotFoundException = "Course nu a fost gasit!";
 
+        public const string CourseAlreadyExistException = "Course deja exista!";
+
+        public const string CourseNullException = "Course nu poate fi null!";
     }
 }

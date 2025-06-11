@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using online_school_api.Books.Repository;
 using online_school_api.Books.Service;
 using online_school_api.Courses.Repository;
+using online_school_api.Courses.Service;
 using online_school_api.Data;
 using online_school_api.Enrolments.Repository;
 using online_school_api.Students.Repository;
@@ -46,6 +47,8 @@ public class Program
         builder.Services.AddScoped<IQueryServiceBook,QueryServiceBook>();
 
         builder.Services.AddScoped<ICourseRepo, CourseRepo>();
+        builder.Services.AddScoped<ICommandServiceCourse, CommandServiceCourse>();
+        builder.Services.AddScoped<IQueryServiceCourse, QueryServiceCourse>();
 
         builder.Services.AddScoped<IEnrolmentRepo, EnrolmentRepo>();
 

@@ -1,4 +1,5 @@
 ﻿using online_school_api.Enrolments.Models;
+using online_school_api.Students.Model;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
